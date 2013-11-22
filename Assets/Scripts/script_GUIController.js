@@ -5,6 +5,8 @@ public var madAlchemySkin: GUISkin; // MasterSkin
 var cursorTexture : Texture2D;
 var cursorMode : CursorMode = CursorMode.Auto;
 var hotSpot : Vector2 = Vector2.zero;
+var combTimer : float = 3.0;
+var timer:boolean = true;
 
 function OnGUI () {
 	GUI.skin = madAlchemySkin;
@@ -48,6 +50,21 @@ function OnGUI () {
 		GameObject.Find("Main Camera").GetComponent(MouseLook).enabled=true;
 		
 	}
+
+	// Display the item required to be created
+	if(timer == true) {
+		GUI.Label (Rect (Screen.width/2 - 300, 100, 600, 50), "You have to create " + GameObject.Find("WinorEnd_Controller").GetComponent(script_winOrEnd).targetCombination); 
+	}
+
+	// Display the message when the game is won
+	if(GameObject.Find("WinorEnd_Controller").GetComponent(script_winOrEnd).playerWon == true) {
+		GUI.Label (Rect (0, 0, Screen.width, Screen.height), "You won! Challenge: Next time do it in one try!");
+	}
+
+	// Display the message when the game is lost
+	if(GameObject.Find("WinorEnd_Controller").GetComponent(script_winOrEnd).playerLost == true) {
+		GUI.Label (Rect (0, 0, Screen.width, Screen.height), "The castle blew up because you were too irresponsible!");
+	}
 }
 
 // Quit Game when escape is pressed
@@ -57,4 +74,10 @@ function Update() {
 		quitMenu = !quitMenu;
  
 	}
+	 if(combTimer > 0){
+  		combTimer -= Time.deltaTime;
+  		timer = true;
+ 	}
+ 	else 
+ 		timer = false;
 }

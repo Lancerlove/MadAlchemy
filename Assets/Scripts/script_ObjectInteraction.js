@@ -7,6 +7,7 @@ var holdsItem : boolean = false;				// check number of items in hand
 var clonedObject:Transform;						// clone of the destroyed instance
 private var changeState : boolean = true;		// holds the state of mousebutton
 var hit : RaycastHit; 							// The object that was hit
+var rate = 30;
 
 function Update()
 {
@@ -66,15 +67,17 @@ function Update()
 					
 					// if the right slot is free, move the object to rightSlot position and parent
 					if(GameObject.Find("cauldronRightSlot").GetComponent(script_rightCheckTop).hasObjectRight == false) {										
-						clonedObject.parent = null;		
-						clonedObject.transform.position = GameObject.Find("cauldronRightSlot").transform.position + Vector3(0,0.2,0);
+						clonedObject.parent = null;	
+						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0,0.2,0));	
+						//clonedObject.transform.position = GameObject.Find("cauldronRightSlot").transform.position + Vector3(0,0.2,0);
 						clonedObject.parent = GameObject.Find("cauldronRightSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronRightSlot").transform.rotation;
 					}
 					// if the left slot is free, move the object to leftSlot position and parent
 					else {
-						clonedObject.parent = null;			
-						clonedObject.transform.position = GameObject.Find("cauldronLeftSlot").transform.position + Vector3(0,0.2,0);
+						clonedObject.parent = null;	
+						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronLeftSlot").transform.position+ Vector3(0,0.2,0));		
+						//clonedObject.transform.position = GameObject.Find("cauldronLeftSlot").transform.position + Vector3(0,0.2,0);
 						clonedObject.parent = GameObject.Find("cauldronLeftSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronLeftSlot").transform.rotation;
 					}
@@ -98,8 +101,9 @@ function Update()
 					changeState = true;
 
 					//unparent object and move it at the collision point - y position is original * half of object's size
-					clonedObject.parent = null;		
-					clonedObject.transform.position = hit.point + Vector3(0, clonedObject.collider.bounds.size.y/2, 0);
+					clonedObject.parent = null;
+					MoveObj(clonedObject.transform.position,hit.point + Vector3(0, clonedObject.collider.bounds.size.y/2, 0) )	;	
+					//clonedObject.transform.position = hit.point + Vector3(0, clonedObject.collider.bounds.size.y/2, 0);
 					clonedObject.transform.rotation = Quaternion(0,0,0,0);
 				}
 
@@ -119,7 +123,8 @@ function Update()
 				GameObject.Find(clonedObject.name).GetComponent(script_objectData).enabled = true;
 				
 				// move back to original position and rotation
-				clonedObject.transform.position = GameObject.Find(clonedObject.name).GetComponent(script_objectData).originalPosition;
+				MoveObj(clonedObject.transform.position, GameObject.Find(clonedObject.name).GetComponent(script_objectData).originalPosition);
+				//clonedObject.transform.position = GameObject.Find(clonedObject.name).GetComponent(script_objectData).originalPosition;
 				clonedObject.transform.rotation = GameObject.Find(clonedObject.name).GetComponent(script_objectData).originalRotation; 
 				
 				//update states
@@ -129,3 +134,16 @@ function Update()
 		}
 	}	
 }
+
+function MoveObj( oldPos : Vector3, newPos : Vector3 ){
+    var t : float = 0.0;
+ 
+    while (t < 1.0) {
+        clonedObject.transform.position = Vector3.Slerp(oldPos, newPos, t);
+        yield;
+        t += Time.deltaTime * rate * 2;
+    }
+}
+
+
+
