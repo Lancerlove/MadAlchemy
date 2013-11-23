@@ -9,6 +9,7 @@ function Update () {
 	if (Physics.Raycast (transform.position, Vector3.up, hit, 10) && (hit.collider.tag == "basic" || hit.collider.tag == "mixed_lvl1" || hit.collider.tag == "mixed_lvl2")) {	
 		hasObjectLeft = true;
 		nameOfObjectLeft = hit.collider.name;
+		print(nameOfObjectLeft);
 	}
 	else {
 		hasObjectLeft = false;

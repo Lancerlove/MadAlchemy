@@ -16,7 +16,7 @@ function Update () {
 	// var to hold the mix created in the cauldron
 	resultedMix = GameObject.Find("MixWizard").GetComponent(script_mixHandler).resultedMix;
 	// if a mix has been created
-	if(resultedMix != null) {
+	if(resultedMix != null && GameObject.Find("MixWizard").GetComponent(script_mixHandler).allowAccess == true) {
 		// iterate through the array and compare it with the mix
 		for(var i = 0; i < stableMix.length; i++) {
 			// if it's a match, then set the light towards green and end the loop

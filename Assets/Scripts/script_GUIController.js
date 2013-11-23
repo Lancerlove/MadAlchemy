@@ -65,6 +65,10 @@ function OnGUI () {
 	if(GameObject.Find("WinorEnd_Controller").GetComponent(script_winOrEnd).playerLost == true) {
 		GUI.Label (Rect (0, 0, Screen.width, Screen.height), "The castle blew up because you were too irresponsible!");
 	}
+
+	if(GameObject.Find("MixWizard").GetComponent(script_mixHandler).itExists == true) {
+		GUI.Label (Rect (Screen.width/2 - 300, 100, 600, 50), "You have already discovered that element"); 
+	}
 }
 
 // Quit Game when escape is pressed

@@ -16,7 +16,7 @@ function Start () {
 
 function Update () {
 
-	mix = GameObject.Find("MixWizard").GetComponent(script_mixHandler).resultedMix;
+	mix = GameObject.Find("stabIndicator").GetComponent(script_StabilityIndicator).resultedMix;
 	if(mix == targetCombination) {
 		playerWon = true;
 	}

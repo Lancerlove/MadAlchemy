@@ -8,6 +8,10 @@ var clonedObject:Transform;			// holds instances
 
 var resultedMix:String; // holds the result of the combination
 var checkOnce:boolean;
+var alreadyExists: Array;
+var itExists:boolean;
+var timer: float = 3.0;
+var allowAccess : boolean = true;
 
 // first 2 elements in the array are the materials and the third one is the result
 // each new line  = a new combination
@@ -69,6 +73,8 @@ var recipeList = [
 function Start() {
 	resultedMix = null;
 	checkOnce = true;
+	alreadyExists = [];
+	itExists = false;
 }
 
 function Update () {
@@ -84,8 +90,21 @@ function Update () {
 	if(resultedMix != null) {
 		//Check Sparkles once
 		if(checkOnce) {
-			spawnMixedObject();
-			checkOnce = true;
+
+			// if mix doesn't match the array of already created elements
+			if(CheckExisting(resultedMix, alreadyExists) == false) {
+				alreadyExists.Push(resultedMix);  // add it to the list
+				spawnMixedObject();  // spawn object
+				checkOnce = true;   // allow next spawn
+				allowAccess = true;   // allow access for stability indicator to get variables
+			}
+			//Otherwise
+			else {
+				allowAccess = false; // block access for stability indicator to get variables 
+				checkOnce = false;  // block spawn
+				ItExists(); // show GUI message, move objects back, allow next spawn and clear mix variable
+			}
+
 		}
 	}
 }
@@ -124,4 +143,29 @@ function spawnMixedObject() {
 	GameObject.Find("cauldronRightSlot").SendMessage("moveObject");
 
 	checkOnce = false;
+}
+
+// API for cross-matching an element with an array
+function CheckExisting(element: String, arr: Array): boolean {
+	for(var i=0; i < arr.length; i++) {
+		if(element == arr[i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// Function to trigger the GUI message that an element has already been created
+function ItExists() {
+	itExists = true;
+
+ 	GameObject.Find("cauldronLeftSlot").SendMessage("moveObject");
+	GameObject.Find("cauldronRightSlot").SendMessage("moveObject");
+
+	yield WaitForSeconds(3);
+ 	itExists = false;	
+
+	resultedMix = null;
+ 	checkOnce = true;
+
 }
