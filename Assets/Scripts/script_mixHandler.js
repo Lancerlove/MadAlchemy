@@ -155,7 +155,7 @@ function CheckExisting(element: String, arr: Array): boolean {
 	return false;
 }
 
-// Function to trigger the GUI message that an element has already been created
+// Function to trigger the GUI message when an element has already been created
 function ItExists() {
 	itExists = true;
 

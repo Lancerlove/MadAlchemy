@@ -69,6 +69,9 @@ function OnGUI () {
 	if(GameObject.Find("MixWizard").GetComponent(script_mixHandler).itExists == true) {
 		GUI.Label (Rect (Screen.width/2 - 300, 100, 600, 50), "You have already discovered that element"); 
 	}
+	if(GameObject.Find("Player").GetComponent(script_ObjectInteraction).isRecipeBook == true) {
+		GUI.Label (Rect (Screen.width/2 - 150, Screen.height - 100, 300, 50), "Press 'R' to open the recipe book!");
+	}
 }
 
 // Quit Game when escape is pressed

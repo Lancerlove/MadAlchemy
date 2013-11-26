@@ -8,6 +8,7 @@ var clonedObject:Transform;						// clone of the destroyed instance
 private var changeState : boolean = true;		// holds the state of mousebutton
 var hit : RaycastHit; 							// The object that was hit
 var rate = 30;
+var isRecipeBook = false;
 
 function Update()
 {
@@ -26,6 +27,7 @@ function Update()
 			if (holdsItem == false) {
 				
 				// display GUI messages
+				isRecipeBook = false;
 				validHit = true;												
 				GameObject.Find("GUIController").SendMessage("OnGUI"); 	// send GUI status to script_GUIController
 				
@@ -50,7 +52,8 @@ function Update()
 		// if the crosshair is pointed at the camera
 		else if (hit.collider.name == "cauldron") { 
 			// hide GUI message saying the name of the Item
-			validHit = false;	
+			validHit = false;
+			isRecipeBook = false;	
 
 			//update GUI status(whether to display the pickup text or not)
 			GameObject.Find("GUIController").SendMessage("OnGUI");		
@@ -68,9 +71,9 @@ function Update()
 					// if the right slot is free, move the object to rightSlot position and parent
 					if(GameObject.Find("cauldronRightSlot").GetComponent(script_rightCheckTop).hasObjectRight == false) {										
 						clonedObject.parent = null;	
-						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0,0.2,0));	
+						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0,0.1,0));	
 						//clonedObject.transform.position = GameObject.Find("cauldronRightSlot").transform.position + Vector3(0,0.2,0);
-						clonedObject.parent = GameObject.Find("cauldronRightSlot").transform;
+						//clonedObject.parent = GameObject.Find("cauldronRightSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronRightSlot").transform.rotation;
 					}
 					// if the left slot is free, move the object to leftSlot position and parent
@@ -78,7 +81,7 @@ function Update()
 						clonedObject.parent = null;	
 						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronLeftSlot").transform.position+ Vector3(0,0.2,0));		
 						//clonedObject.transform.position = GameObject.Find("cauldronLeftSlot").transform.position + Vector3(0,0.2,0);
-						clonedObject.parent = GameObject.Find("cauldronLeftSlot").transform;
+						//clonedObject.parent = GameObject.Find("cauldronLeftSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronLeftSlot").transform.rotation;
 					}
 				}
@@ -87,6 +90,7 @@ function Update()
 		else if(hit.collider.name == "table") {
 			// hide GUI message saying the name of the Item
 			validHit = false;	
+			isRecipeBook = false;
 
 			//update GUI status(whether to display the pickup text or not)
 			GameObject.Find("GUIController").SendMessage("OnGUI");		
@@ -109,10 +113,14 @@ function Update()
 
 			}
 		}
+		else if(hit.collider.name == "recipeBook") {
+			isRecipeBook = true;
+			GameObject.Find("GUIController").SendMessage("OnGUI");		
+		}
 		// if hit didn't match the above collisions
 		else {
 			validHit = false;
-
+			isRecipeBook = false;
 			//update messages
 			GameObject.Find("GUIController").SendMessage("OnGUI");
 
