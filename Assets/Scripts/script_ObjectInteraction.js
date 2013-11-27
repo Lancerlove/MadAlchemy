@@ -18,7 +18,7 @@ function Update()
 	// the ray is shooting from the center of the screen/camera
 	var ray : Ray = Camera.main.ScreenPointToRay(Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane));	// The ray - Middle of the screen
 
-	if (Physics.Raycast (ray, hit, 10)) {
+	if (Physics.Raycast (ray, hit, 20)) {
 		
 		// If hit is a pickable object
 		if (hit.collider.tag == "basic" || hit.collider.tag == "mixed_lvl1" || hit.collider.tag == "mixed_lvl2") {
@@ -51,6 +51,7 @@ function Update()
 		}
 		// if the crosshair is pointed at the camera
 		else if (hit.collider.name == "cauldron") { 
+			print(hit.collider.name);
 			// hide GUI message saying the name of the Item
 			validHit = false;
 			isRecipeBook = false;	
@@ -71,7 +72,7 @@ function Update()
 					// if the right slot is free, move the object to rightSlot position and parent
 					if(GameObject.Find("cauldronRightSlot").GetComponent(script_rightCheckTop).hasObjectRight == false) {										
 						clonedObject.parent = null;	
-						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0,0.1,0));	
+						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0, 0.2, 0));	
 						//clonedObject.transform.position = GameObject.Find("cauldronRightSlot").transform.position + Vector3(0,0.2,0);
 						//clonedObject.parent = GameObject.Find("cauldronRightSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronRightSlot").transform.rotation;
@@ -79,7 +80,7 @@ function Update()
 					// if the left slot is free, move the object to leftSlot position and parent
 					else {
 						clonedObject.parent = null;	
-						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronLeftSlot").transform.position+ Vector3(0,0.2,0));		
+						MoveObj(clonedObject.transform.position + Vector3(0,0.3,0), GameObject.Find("cauldronLeftSlot").transform.position+ Vector3(0, 0.2, 0));		
 						//clonedObject.transform.position = GameObject.Find("cauldronLeftSlot").transform.position + Vector3(0,0.2,0);
 						//clonedObject.parent = GameObject.Find("cauldronLeftSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronLeftSlot").transform.rotation;
@@ -146,7 +147,7 @@ function Update()
 function MoveObj( oldPos : Vector3, newPos : Vector3 ){
     var t : float = 0.0;
  
-    while (t < 1.0) {
+    while (t < 1.5) {
         clonedObject.transform.position = Vector3.Slerp(oldPos, newPos, t);
         yield;
         t += Time.deltaTime * rate * 2;

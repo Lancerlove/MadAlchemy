@@ -3,6 +3,8 @@
 var changeState:boolean;
 var isLooking:boolean;
 var createdElements: Array;
+var	isOpened = false;
+
 function Start () {
 	changeState = true;
 	
@@ -15,20 +17,14 @@ function Update () {
 	isLooking = GameObject.Find("Player").GetComponent(script_ObjectInteraction).isRecipeBook;
 
 	if(Input.GetKeyDown(KeyCode.R) && changeState && isLooking == true) {
-		print("Opened RecipeBook");
-		DisplayElements();
 		changeState = false;
+		isOpened = true;
+		GameObject.Find("GUIController").SendMessage("OnGUI");
 	}
 	else if(Input.GetKeyDown(KeyCode.R) && changeState == false) {
-		print("Closed RecipeBook");
 		changeState = true;
+		isOpened = false;
+		GameObject.Find("GUIController").SendMessage("OnGUI");
 	}
 
-}
-
-function DisplayElements() {
-
-	for (var i=0; i < createdElements.length; i++) {
-		print(createdElements);
-	}
 }

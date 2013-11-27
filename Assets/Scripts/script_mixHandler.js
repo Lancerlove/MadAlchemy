@@ -32,7 +32,7 @@ var recipeList = [
 ,
 ["Goldbark", "Molten Lava", "Liquid Gold"]
 ,
-["Goldbark", "Powdered Unicorn Horn", "Philosopher's Stone"]
+["Goldbark", "Powdered Horn", "Philosopher's Stone"]
 ,
 ["Goldbark", "Dream Leaf", "Elixir of Transcendence"]
 ,
@@ -40,19 +40,19 @@ var recipeList = [
 ,
 ["Frost Serum", "Essence of Fire", "FireFrost Elixir"]
 ,
-["Frost Serum", "Powdered Unicorn Horn", "Instant Freeze Dust"]
+["Frost Serum", "Powdered Horn", "Instant Freeze Dust"]
 ,
 ["Frost Serum", "Dream Leaf", "Herb of Eternal Slumber"]
 ,
 ["Frost Serum", "Molten Lava", "Rock"]
 ,
-["Powdered Unicorn Horn", "Dream Leaf", "Healing Potion"]
+["Powdered Horn", "Dream Leaf", "Healing Potion"]
 ,
-["Powdered Unicorn Horn", "Deathblossom", "Dust of Disintegration"]
+["Powdered Horn", "Deathblossom", "Dust of Disintegration"]
 ,
-["Powdered Unicorn Horn", "Molten Lava", "Orb of Scrying"]
+["Powdered Horn", "Molten Lava", "Orb of Scrying"]
 ,
-["Powdered Unicorn Horn", "Blackthorn", "Dust of Magic-Negation"]
+["Powdered Horn", "Blackthorn", "Dust of Magic-Negation"]
 ,
 ["Molten Lava", "Dream Leaf", "Elixir of Mindless Rage"]
 ,
@@ -62,7 +62,7 @@ var recipeList = [
 ,
 ["Molten Lava", "Essence of Fire", "Vial of Cataclysm"]
 ,
-["Essence of Fire", "Powdered Unicorn Horn", "Smoke of Eternity"]
+["Essence of Fire", "Powdered Horn", "Smoke of Eternity"]
 ,
 ["Essence of Fire", "Deathblossom", "Foul Smelling Smoke"]
 ,

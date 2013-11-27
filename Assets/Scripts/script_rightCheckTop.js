@@ -8,6 +8,7 @@ var rate = 30;
 
 function Update () {
 	if (Physics.Raycast (transform.position, Vector3.up, hit, 10) && (hit.collider.tag == "basic" || hit.collider.tag == "mixed_lvl1" || hit.collider.tag == "mixed_lvl2")) {	
+		//print(hit.collider.name);
 		hasObjectRight = true;
 		nameOfObjectRight = hit.collider.name;
 	}
@@ -29,4 +30,3 @@ function moveObject() {
 	clonedObject.name = clonedObject.name.Substring(0, clonedObject.name.length - 7);
 	clonedObject.GetComponent(script_objectData).enabled = true;
 }
-
