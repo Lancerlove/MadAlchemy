@@ -98,7 +98,7 @@ function OnGUI () {
 		// Draw the book background
 		GUI.DrawTexture(Rect(Screen.width/2 - 512, Screen.height/2 - 383, _bookWidth, _bookHeight), bookTexture);
 			GUI.skin = recipeBookSkin;
-		GUI.Label(Rect (Screen.width/2 + 150, (Screen.height - ((Screen.height - _bookHeight) + ((Screen.height - _bookHeight) / 2))) + 10, 500, 50), "Press 'R' to close");
+		GUI.Label(Rect (Screen.width/2 + 180, _bookHeight + ((Screen.height - _bookHeight) / 2) - 100, 500, 50), "Press 'R' to close");
 			GUI.skin = madAlchemySkin;
 		// Draw the default first page - info about the recipe book
 
