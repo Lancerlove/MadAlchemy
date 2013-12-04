@@ -31,4 +31,6 @@ function Update () {
 	else if((playerWon == true || playerLost == true) && Timer <= 0){
 		Application.LoadLevel("MainMenu");
 	}
+
+
 }

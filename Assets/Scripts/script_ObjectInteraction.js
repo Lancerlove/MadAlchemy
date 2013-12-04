@@ -21,7 +21,7 @@ function Update()
 	if (Physics.Raycast (ray, hit, 20)) {
 		
 		// If hit is a pickable object
-		if (hit.collider.tag == "basic" || hit.collider.tag == "mixed_lvl1" || hit.collider.tag == "mixed_lvl2") {
+		if (hit.collider.tag == "basic" || hit.collider.tag == "mixed_lvl1") {
 			
 			// and you have no item in hand
 			if (holdsItem == false) {
@@ -51,7 +51,6 @@ function Update()
 		}
 		// if the crosshair is pointed at the camera
 		else if (hit.collider.name == "cauldron") { 
-			print(hit.collider.name);
 			// hide GUI message saying the name of the Item
 			validHit = false;
 			isRecipeBook = false;	
@@ -76,6 +75,7 @@ function Update()
 						//clonedObject.transform.position = GameObject.Find("cauldronRightSlot").transform.position + Vector3(0,0.2,0);
 						//clonedObject.parent = GameObject.Find("cauldronRightSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronRightSlot").transform.rotation;
+						Invoke("InvokeRight",0.2);
 					}
 					// if the left slot is free, move the object to leftSlot position and parent
 					else {
@@ -84,6 +84,8 @@ function Update()
 						//clonedObject.transform.position = GameObject.Find("cauldronLeftSlot").transform.position + Vector3(0,0.2,0);
 						//clonedObject.parent = GameObject.Find("cauldronLeftSlot").transform;
 						clonedObject.transform.rotation = GameObject.Find("cauldronLeftSlot").transform.rotation;
+						Invoke("InvokeLeft",0.2);
+						
 					}
 				}
 			}
@@ -155,4 +157,9 @@ function MoveObj( oldPos : Vector3, newPos : Vector3 ){
 }
 
 
-
+function InvokeRight() {
+	Instantiate(GameObject.Find("particle_" + clonedObject.name), GameObject.Find("cauldronRightSlot").transform.position+ Vector3(0, 0.2, 0), Quaternion(0,0,0,0));
+}
+function InvokeLeft() {
+	Instantiate(GameObject.Find("particle_" + clonedObject.name), GameObject.Find("cauldronLeftSlot").transform.position+ Vector3(0, 0.2, 0), Quaternion(0,0,0,0));
+}

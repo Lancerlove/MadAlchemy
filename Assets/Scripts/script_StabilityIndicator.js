@@ -7,6 +7,7 @@
 	var isFound:boolean;
 	var currentColour: Color;
 	var rate = 3;
+	var _sizeOfText : Vector2;
 	public var madAlchemySkin: GUISkin; // MasterSkin
 
 	//array to hold the stable elements
@@ -44,49 +45,60 @@ function Update () {
 function OnGUI() {
 
 	GUI.skin = madAlchemySkin;
+
 	//Display Counter Text
 	switch(counter) {
 		case -3:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(3.3F, 0, 0));
-			GUI.Label(Rect(30,30,500,50), "Well, you've done it! You blew up the castle!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("Well, you've done it! You blew up the castle!"));
+			GUI.Label(Rect(30,30, _sizeOfText.x + 40, 50), "Well, you've done it! You blew up the castle!");
 			break;
 		case -2:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(2.3F, 0, 0));
-			GUI.Label(Rect(30,30,500,50), "Oh,oh! You are very close to blowing the castle up!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("Oh,oh! You are very close to blowing the castle up!"));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "Oh,oh! You are very close to blowing the castle up!");
 			break;
 		case -1:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(1.3F, 0, 0));
-			GUI.Label(Rect(30,30,500,50), "Wrong combination! The stability went down!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("Wrong combination! The stability went down!"));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "Wrong combination! The stability went down!");
 			break;
 		case 0:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(0, 0, 0));
-			GUI.Label(Rect(30,30,500,50), "The stability is normal.");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("The stability is normal."));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "The stability is normal.");
 			break;
 		case 1:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(0, 1.3F, 0));
-			GUI.Label(Rect(30,30,500,50), "Good choice. The stability has been improved.");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("Good choice. The stability has been improved."));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "Good choice. The stability has been improved.");
 			break;
 		case 2:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(0, 2.3F, 0));
-			GUI.Label(Rect(30,30,500,50), "The stability level is really good!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("The stability level is really good!"));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "The stability level is really good!");
 			break;
 		case 3:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(0, 3.3F, 0));
-			GUI.Label(Rect(30,30,500,50), "You are really good at this game!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("You are really good at this game!"));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "You are really good at this game!");
 			break;
 		default:
 			currentColour = light.color;
 			ChangeColor(currentColour,Color(0, 3.3F, 0));
-			GUI.Label(Rect(30,30,500,50), "Well done!");
+			_sizeOfText =  GUI.skin.label.CalcSize(new GUIContent("Well done!"));
+			GUI.Label(Rect(30,30,_sizeOfText.x + 40, 50), "Well done!");
 			break;
 	}
+			madAlchemySkin.label.alignment = 4;
+		madAlchemySkin.label.padding.left = 0;
 	
 }
 

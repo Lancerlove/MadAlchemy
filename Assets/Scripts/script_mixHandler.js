@@ -12,7 +12,7 @@ var alreadyExists: Array;
 var itExists:boolean;
 var timer: float = 3.0;
 var allowAccess : boolean = true;
-
+var delay : float = 3;
 // first 2 elements in the array are the materials and the third one is the result
 // each new line  = a new combination
 var recipeList = [
@@ -90,21 +90,20 @@ function Update () {
 	if(resultedMix != null) {
 		//Check Sparkles once
 		if(checkOnce) {
+				// if mix doesn't match the array of already created elements
+				if(CheckExisting(resultedMix, alreadyExists) == false) {
+					alreadyExists.Push(resultedMix);  // add it to the list
+					checkOnce = false;
+					allowAccess = false;
+					spawnMixedObject();  // spawn object
 
-			// if mix doesn't match the array of already created elements
-			if(CheckExisting(resultedMix, alreadyExists) == false) {
-				alreadyExists.Push(resultedMix);  // add it to the list
-				spawnMixedObject();  // spawn object
-				checkOnce = true;   // allow next spawn
-				allowAccess = true;   // allow access for stability indicator to get variables
-			}
-			//Otherwise
-			else {
-				allowAccess = false; // block access for stability indicator to get variables 
-				checkOnce = false;  // block spawn
-				ItExists(); // show GUI message, move objects back, allow next spawn and clear mix variable
-			}
-
+				}
+				//Otherwise
+				else {
+					allowAccess = false; // block access for stability indicator to get variables 
+					checkOnce = false;  // block spawn
+					ItExists(); // show GUI message, move objects back, allow next spawn and clear mix variable
+				}
 		}
 	}
 }
@@ -127,7 +126,8 @@ function MixMatch(item1:String, item2: String) {
 
 function spawnMixedObject() {
 	Destroy(Instantiate(GameObject.Find("LightGlow"), transform.position + Vector3(0, .5, 0), Quaternion(0,0,0,0)), 3.0);
-	
+
+	yield WaitForSeconds(3);
 	clonedObject = Instantiate(GameObject.Find(resultedMix).transform, transform.position, Quaternion(0,0,0,0));
 	clonedObject.name = clonedObject.name.Substring(0, clonedObject.name.length - 7);
 
@@ -142,7 +142,8 @@ function spawnMixedObject() {
 	GameObject.Find("cauldronLeftSlot").SendMessage("moveObject");
 	GameObject.Find("cauldronRightSlot").SendMessage("moveObject");
 
-	checkOnce = false;
+	checkOnce = true;   // allow next spawn
+	allowAccess = true;   // allow access for stability indicator to get variables
 }
 
 // API for cross-matching an element with an array
